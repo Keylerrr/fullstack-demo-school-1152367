@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from rest_framework.routers import DefaultRouter
-from students.views import StudentViewSet, StudentGroupViewSet
+from students.views import StudentViewSet, StudentGroupViewSet, StudentDetailView
 
 router = DefaultRouter()
 router.register(r'students', StudentViewSet, basename='student')
@@ -27,4 +27,5 @@ router.register(r'student-groups', StudentGroupViewSet, basename='studentgroup')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('students/<int:id>/', StudentDetailView.as_view(), name='student-detail'),
 ]

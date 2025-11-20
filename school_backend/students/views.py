@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Student, StudentGroup
 from .serializers import StudentSerializer, StudentGroupSerializer
@@ -35,3 +35,8 @@ class StudentViewSet(viewsets.ModelViewSet):
     ordering_fields = ['full_name', 'code', 'email', 'group']
     ordering = ['code']
 
+
+class StudentDetailView(generics.RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    lookup_field = 'id'
